@@ -1,0 +1,9 @@
+aseriesCMB.c：PSV Hybrid中计算台站到Kirchhoff接口的Green's function
+grtphase: 利用GRT计算特定震相的波形
+
+
+Notes:
+
+1. aseriesCMB和grtphase使用了相同的GRT子程序，但是aseriesCMB中其输出为green和greenz，
+   而grtphase中其输出为greenr和greenz。二者均正确的前提是GRT子程序在isource=0时输出
+   green和greenz，在isource=1时输出greenr和greenz。需要进一步确认！

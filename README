@@ -1,0 +1,57 @@
+Infomation fo 2D PSV Hybrid Code
+http://seis.ustc.edu.cn/PSV_Hybrid
+
+Copyright (c) 1995-2015, L. Wen
+###########################
+The package is free and distributed in the hope that it will be useful. 
+You can use it and/or modify it under the terms of the GNU General Public License 
+for NON-COMMERCIAL purposes.
+
+It does not come with any warranties, nor is it guaranteed to work on your computer.
+The user assumes full responsibility for the use of this system.
+We are NOT responsible for any damage that may follow from correct or incorrect
+use of this package.
+
+Permission is granted to make and distribute verbatim copies of this license provided
+that the copyright notice and these paragraphs are preserved on all copies.
+
+
+Description
+===========
+
+This package is 2D PSV Hybrid code developed by Lianxing Wen
+for calculating synthetic seismograms involving two dimensional
+localized heterogeneous structures.
+
+Reference
+=========
+
+Wen and Helmberger (1998), JGR
+
+Requirement
+===========
+
+#. Seismic Analysis Code (SAC)
+
+   You need SAC installed on your system, and
+   $(SACHOME) set to the SAC installation directory.
+
+#. Numerical Recipes (http://www.nr.com/)
+
+   nrutil.h and nrutil.c from Numerical Recipes are needed, which should be purchased.
+
+#. Generic Mapping Tools
+
+   Some figures are plotted using GMT, it is not necessary.
+
+Installation
+============
+
+Go to src directory, and run make.
+
+Examples
+========
+
+Just change to the example diretory and run::
+
+    perl RunModel.pl

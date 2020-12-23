@@ -1,0 +1,150 @@
+# following for model description
+flat=0                  # flag for flat earth
+                        #   0: Spherical
+                        #   1: flat
+raymodel=prem.par       # model for GRT and FD
+                        # Format:  layers, source_layer
+			            #         vp[0]      vs[0]      d[0]      th[0]
+			            #         ......     ......     .....     .....
+			            #         vp[layers] vs[layers] d[layers] th[layers]
+			            #         number_of_rays
+			            #         Total_segs source_layer ... final_layer
+			            #         1          ..........
+			            # Note: Waves are down to the bottom of final_layer
+
+fdmodel=fdmodel         # FD model
+                        #Format: num_of_layers
+        	    		#        numb_of nods vp, vs, d
+		    	        #        x positions of nodes->counted from xmin
+			            #        z positions of nodes->counted from iz=0 (or
+			            #            bottom of final_layer)
+			            #        numb_of nods vp, vs, d
+			            #        x positions of nodes->counted from xmin
+			            #        z positions of nodes->counted from iz=0 (or
+			            #            bottom of final_layer)
+
+# parameters for GRT and FD
+xmin=400.5             # x distance for vertical GRT-FD interface
+h=1.0                  # dx for GRT output and FD
+nx=4200                 # number of grids of horizontal GRT-FD interface
+nd=200                  # number of grids of reflection region
+nf=500                 # number of grids below ICB
+nt=6000                 # nt for GRT calculation, nt' for FD is determined by nt
+
+# parameters for GRT
+der=0                   # do derivation or not in GRT
+dp=0.01                 # dt for GRT calculation
+tstart=415              # start time for GRT green's function
+greenfile=GRTSrcGreen  # Green's function from source to FD region
+                        # calculated by GRT
+layerrefl=1             # counting reflections in each layer
+COMP=2                  # 2 component for PSV system
+mtd=2                   # factor controlling contour
+diffile=0               # demult GRT green's function into a different file
+bounce=2
+
+#following for the source
+theta=0.0              # theta
+dip=90.                # dip
+lamda=0.0              # lamda
+azmuth=0.0             # azimuth
+#following for the source time Gauss function
+ts=3.0                 # center of source time Gauss function
+sgm=.2                 # width of source time Gauss function
+
+# Finite Difference Region
+dt=0.005                 # dt for finite-difference
+nl=200                   # number of meshes in the left region
+nh=60                   # number of meshes for absorbing region
+                        # nh<nd && nd<nl && nd<nf
+afilter=4               # mode for filter applied
+			            # 0 -> no filter
+                        # 1 -> bottom filtered
+			            # 2 -> bottom left filtered
+			            # 3 -> bottom left top filtered
+			            # 4 -> all four regions filtered
+atten=4                 #mode for attenuation applied
+			            # 0 -> no attenuation
+                        # 1 -> bottom attentuated
+			            # 2 -> bottom left attentuated
+			            # 3 -> bottom left top attentuated
+			            # 4 -> all four regions attentuated
+ass=0.9999              # percentage of wave attenuatio
+
+# following for FD models
+readpars=0               # if readpars!=0, read discrete vp, vs, rho model in
+pvelocity=pvel
+svelocity=svel
+density=den
+scalex=35
+scalez=35
+variation=0.02
+seed=3
+
+# following for snapshot
+plot_snap=0              # plotting snapshot or not
+startsnap=200            # starting time step
+incresnap=200            # time steps between different snapshots
+increx=5
+increz=5
+plot_w=0                 # vertical velocity (absolute value) or not (radial)
+
+plot_trace=0             # plotting traces or not
+xtrace=8                 # number of xtraces with increment of 100
+ztrace=10                # number of ztraces with increment of 8
+
+# FD output to Kirchoff
+kdt=2                   # time spacing factor of FD output to Kirchoff
+kdx=1                   # mesh spacing factor of FD output to Kirchoff
+source=0                # waves types of FD output to Kirchoff
+                        # source=0  => P wave only
+                        # source=1  => S wave only
+                        # source=2  => P and S waves
+# output below ICB for PKIKP phase
+rcore=0                # FD output below ICB
+zcore=10.1              # zcore km away from ICB (flattened)
+fdout=green_kir.out
+# output for PKiKP phase
+topp=1                  # output P wave from FD to Kirchoff
+ztop=48.45               # FD output above GRT-FD interface (10 km above 5061)
+toppfile=Pgreen_kir.out # output Green's functions from FD to Kirchoff
+
+#following for WKM
+greenfile_WKM=GRTPSVGreen           # output file for WKM Green's library
+xmax_WKM=8000.5                      # Max Distance in WKM (km)
+dx_WKM=1.0                          # spacing of receivers (km)
+nr_WKM=8000                         # number of receivers
+dt_WKM=0.01                         # time interval (seconds)
+nt_WKM=8000                         # time steps
+rdep=5051                           # depth of receivers
+raytype=5                           # P wave
+ReadFile=0                          # if ReadFile!=0: read from RayParFile
+RayParFile=rayparGRT                # Ray Par file from WKM. What's this?
+Gtstart=470                         # starting time
+Greduce_vel=1.0                       # reduce velocity t=Gtstart+dist/RAD*Greduce_vel
+bottom=100
+top=100
+
+#following for the demult2kir
+ntsample=1                         #sample spacing
+nt_kir=6000                        #time steps for output
+kirfile_x=fdout.x                  #x-component of Green's
+kirfile_z=fdout.z                  #z-component of Green's
+reduce_vel=200                       #dist/time
+
+# following for the Kirchhoff
+greenfile_kir=GreenWKM_kir         # a temporal Green file for Kirchhoff
+                                   # modified to (Green, dGreen/dz)
+
+# line2point
+Greens_Output=
+Moment=1.0e30           # Moment (dyn-cm)
+Conv_Source=0            #Convolving with Seismic Source
+Dt1=2.0                  #For triangle Dt1, Dt2, Dt3
+Dt2=1.0                  #For triangle Dt1, Dt2, Dt3
+Dt3=2.0                  #For triangle Dt1, Dt2, Dt3
+point_source=1           #do line -> point source correction
+
+beta=5.501432            #shear velocity at source layer
+zs=600.0                 #source depth
+rhos=3.969538            #density at source layer

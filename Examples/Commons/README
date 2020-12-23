@@ -1,0 +1,18 @@
+This directory contains common files for Hybrid P-SV codes:
+
+- prem.nd:          Standard PREM model from TauP
+- modify_prem.pl:   convert prem.nd to layered homogeneous model
+- prem.grt:         PREM model for GRT library.
+                    The first layer must have a thickness of zero.
+                    S velocity of the outer core must be non-zero.
+- prem.par.0        raymodel for PREM
+- prem.par.1        raymodel for PREM with a 40 km layer for reflection region
+- prem.par.2        raymodel for PREM with a 40 km layer for reflection region
+                    and a 80 km homegeneous layer above ICB
+
+- div.pal           GMT cpt file for snapshot
+- GenDipModel.pl    Generate 2D FD model with dipping edge
+- plotmodel.pl      Plot vp, vs, rho model
+- plotsnap.pl       Plot snapshots
+
+- RunModel.pl       RunModel script for all running
